@@ -1,5 +1,7 @@
 import ListboxExemple from '../components/Listbox'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { save } from '../Redux/saveIntoLocalStorageSlice'
 
 import TextField from '@mui/material/TextField'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
@@ -7,19 +9,23 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 
 const Form = () => {
+  const dispatch = useDispatch()
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [value, setValue] = useState(null)
-  const [test, setTest] = useState(null)
+  const [birthDate, setBirthDate] = useState(null)
+  const [startDate, setStartDate] = useState(null)
 
   const handleFirstname = e => setFirstName(e.target.value)
   const handleLastname = e => setLastName(e.target.value)
-  // const handleFirstname = e => setFirstName(e.target.value)
-  // const handleLastname = e => setLastName(e.target.value)
+
+   const birthDateStringify = JSON.stringify(birthDate)
+
+  const data = { firstName, lastName, birthDateStringify }
 
   const submitSave = e => {
     e.preventDefault()
-    console.log(`Prénom: ${firstName}`, `Nom: ${lastName}`, value, test)
+    dispatch(save(data))
   }
 
   return (
@@ -47,20 +53,16 @@ const Form = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label='Date de naissance'
-          value={value}
-          onChange={newValue => {
-            setValue(newValue)
-          }}
+          value={birthDate}
+          onChange={newBirthDate => setBirthDate(newBirthDate)}
           renderInput={params => <TextField {...params} />}
         />
       </LocalizationProvider>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
-          label='Autre test'
-          test={test}
-          onChange={newTest => {
-            setTest(newTest)
-          }}
+          label='Date de démarrage'
+          value={startDate}
+          onChange={newStartDate => setStartDate(newStartDate)}
           renderInput={params => <TextField {...params} />}
         />
       </LocalizationProvider>
@@ -74,7 +76,7 @@ const Form = () => {
             type='text'
             name='lastname'
             id='lastname'
-            onChange={handleLastname}
+            onChange={handleFirstname}
           />
         </div>
         <div>
