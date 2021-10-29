@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import saveIntoLocalStorageSlice from './saveIntoLocalStorageSlice'
+import saveUserDataSlice from './saveUserDataSlice'
 
 export const store = configureStore({
   reducer: {
-    save: saveIntoLocalStorageSlice
+    save: saveUserDataSlice
   }
 })
+// saveUserData

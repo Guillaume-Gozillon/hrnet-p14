@@ -1,7 +1,7 @@
 import ListboxExemple from '../components/Listbox'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { save } from '../Redux/saveIntoLocalStorageSlice'
+import { save } from '../Redux/saveUserDataSlice'
 
 import TextField from '@mui/material/TextField'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
@@ -13,15 +13,16 @@ const Form = () => {
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [birthDate, setBirthDate] = useState(null)
-  const [startDate, setStartDate] = useState(null)
+  const [birthDateObj, setBirthDate] = useState(null)
+  const [startDateObj, setStartDate] = useState(null)
 
   const handleFirstname = e => setFirstName(e.target.value)
   const handleLastname = e => setLastName(e.target.value)
 
-   const birthDateStringify = JSON.stringify(birthDate)
+   const birthDate = JSON.stringify(birthDateObj)
+   const startDate = JSON.stringify(startDateObj)
 
-  const data = { firstName, lastName, birthDateStringify }
+  const data = { firstName, lastName, birthDate , startDate }
 
   const submitSave = e => {
     e.preventDefault()
@@ -53,7 +54,7 @@ const Form = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label='Date de naissance'
-          value={birthDate}
+          value={birthDateObj}
           onChange={newBirthDate => setBirthDate(newBirthDate)}
           renderInput={params => <TextField {...params} />}
         />
@@ -61,7 +62,7 @@ const Form = () => {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           label='Date de démarrage'
-          value={startDate}
+          value={startDateObj}
           onChange={newStartDate => setStartDate(newStartDate)}
           renderInput={params => <TextField {...params} />}
         />
