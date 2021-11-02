@@ -17,12 +17,23 @@ export const saveUserDataSlice = createSlice({
       state.firstName = action.payload.firstName,
       state.lastName = action.payload.lastName,
       state.birthDate = action.payload.birthDate,
-      state.startDate = action.payload.startDate
+      state.startDate = action.payload.startDate,
+      state.street = action.payload.street,
+      state.city = action.payload.city,
+      state.zipcode = action.payload.zipcode
 
       const { firstName, lastName, birthDate, startDate } = state
-      userRedux.push({ firstName, lastName, birthDate, startDate })
+      userRedux.push({
+        firstName,
+        lastName,
+        birthDate,
+        startDate,
+        street,
+        city,
+        zipcode
+      })
 
-      localStorage.setItem('data', JSON.stringify(userRedux))
+      localStorage.setItem('userData', JSON.stringify(userRedux))
     }
   }
 })

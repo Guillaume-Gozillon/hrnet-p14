@@ -1,3 +1,18 @@
+export const dateFormat = date => {
+  const Stringifying = JSON.stringify(date)
+  const dateFormating = Stringifying.substring(0, 11)
+
+  return dateFormating
+}
+
+export const department = [
+  { name: 'Sales' },
+  { name: 'Marketing' },
+  { name: 'Engineering' },
+  { name: 'Human Resouces' },
+  { name: 'Legal' }
+]
+
 export const stateUSA = [
   { name: 'Alabama' },
   { name: 'Alaska' },
@@ -59,10 +74,3 @@ export const stateUSA = [
   { name: 'Wisconsin' },
   { name: 'Wyoming' }
 ]
-
-export const dateFormat = date => {
-  const Stringifying = JSON.stringify(date)
-  const dateFormating = Stringifying.substring(0, 11)
-
-  return dateFormating
-}

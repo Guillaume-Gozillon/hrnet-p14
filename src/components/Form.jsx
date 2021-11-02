@@ -1,12 +1,11 @@
-import ListboxExemple from '../components/Listbox'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { save } from '../Redux/saveUserDataSlice'
 
-import TextField from '@mui/material/TextField'
-import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import DatePicker from '@mui/lab/DatePicker'
+import { stateUSA, department } from '../utils'
+import ListboxSelect from './ListboxSelect'
+import InputLabel from './InputLabel'
+import BasicDatePicker from './BasicDatePicker'
 
 const Form = () => {
   const dispatch = useDispatch()
@@ -15,14 +14,22 @@ const Form = () => {
   const [lastName, setLastName] = useState('')
   const [birthDateObj, setBirthDate] = useState(null)
   const [startDateObj, setStartDate] = useState(null)
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+  const [zipcode, setZipcode] = useState('')
 
-  const handleFirstname = e => setFirstName(e.target.value)
-  const handleLastname = e => setLastName(e.target.value)
+  const birthDate = JSON.stringify(birthDateObj)
+  const startDate = JSON.stringify(startDateObj)
 
-   const birthDate = JSON.stringify(birthDateObj)
-   const startDate = JSON.stringify(startDateObj)
-
-  const data = { firstName, lastName, birthDate , startDate }
+  const data = {
+    firstName,
+    lastName,
+    birthDate,
+    startDate,
+    street,
+    city,
+    zipcode
+  }
 
   const submitSave = e => {
     e.preventDefault()
@@ -31,69 +38,36 @@ const Form = () => {
 
   return (
     <form className='flex flex-col'>
-      <label htmlFor='firstname' className='mb-1 text-lg'>
-        Prénom
-      </label>
-      <input
-        className='mb-3 rounded-md border-solid border-4'
-        type='text'
-        name='firstname'
+      <InputLabel
         id='firstname'
-        onChange={handleFirstname}
-      />
-      <label htmlFor='lastname' className='mb-1 text-lg'>
-        Nom
-      </label>
-      <input
-        className='mb-3 rounded-md border-solid border-4'
+        value='Prénom'
+        setState={setFirstName}
         type='text'
-        name='lastname'
-        id='lastname'
-        onChange={handleLastname}
       />
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label='Date de naissance'
-          value={birthDateObj}
-          onChange={newBirthDate => setBirthDate(newBirthDate)}
-          renderInput={params => <TextField {...params} />}
-        />
-      </LocalizationProvider>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          label='Date de démarrage'
-          value={startDateObj}
-          onChange={newStartDate => setStartDate(newStartDate)}
-          renderInput={params => <TextField {...params} />}
-        />
-      </LocalizationProvider>
-      <div className='w-full'>
+      <InputLabel
+        id='lastName'
+        value='Nom'
+        setState={setLastName}
+        type='text'
+      />
+      <BasicDatePicker value={birthDateObj} setState={setBirthDate} />
+      <BasicDatePicker value={startDateObj} setState={setStartDate} />
+      <div className='w-full border-8'>
         <div className='name'>
-          <label htmlFor='lastname' className='mb-1 text-lg'>
-            Nom
-          </label>
-          <input
-            className='mb-3 rounded-md border-solid border-4'
-            type='text'
-            name='lastname'
-            id='lastname'
-            onChange={handleFirstname}
-          />
+          <InputLabel id='street' value='Adresse' setState={setStreet} />
         </div>
         <div>
-          <label htmlFor='lastname' className='mb-1 text-lg'>
-            Nom
-          </label>
-          <input
-            className='mb-3 rounded-md border-solid border-4'
-            type='text'
-            name='lastname'
-            id='lastname'
-            onChange={handleLastname}
-          />
+          <InputLabel id='city' value='Ville' setState={setCity} />
         </div>
+        <ListboxSelect data={stateUSA} />
+        <InputLabel
+          id='zipcode'
+          value='Code postale'
+          setState={setZipcode}
+          type='number'
+        />
       </div>
-      <ListboxExemple />
+      <ListboxSelect data={department} />
       <button onClick={submitSave}>Sauvegarder</button>
     </form>
   )

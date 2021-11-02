@@ -1,10 +1,9 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { stateUSA } from '../utils'
 
-export default function ListboxExemple() {
-  const [selected, setSelected] = useState(stateUSA[0])
+const ListboxSelect = ({ data }) => {
+  const [selected, setSelected] = useState(data[0])
 
   return (
     <div>
@@ -26,7 +25,7 @@ export default function ListboxExemple() {
             leaveTo='opacity-0'
           >
             <Listbox.Options className='absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-              {stateUSA.map((person, personIdx) => (
+              {data.map((person, personIdx) => (
                 <Listbox.Option
                   key={personIdx}
                   className={({ active }) =>
@@ -65,3 +64,5 @@ export default function ListboxExemple() {
     </div>
   )
 }
+
+export default ListboxSelect
