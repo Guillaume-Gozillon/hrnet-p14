@@ -3,8 +3,13 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   firstName: '',
   lastName: '',
-  birthDate: '',
-  startDate: ''
+  birthDate: null,
+  startDate: null,
+  street: '',
+  city: '',
+  usaState: '',
+  zipcode:'',
+  departmentState:''
 }
 
 const userRedux = []
@@ -20,9 +25,22 @@ export const saveUserDataSlice = createSlice({
       state.startDate = action.payload.startDate,
       state.street = action.payload.street,
       state.city = action.payload.city,
-      state.zipcode = action.payload.zipcode
+      state.usaState = action.payload.usaState,
+      state.zipcode = action.payload.zipcode,
+      state.departmentState = action.payload.departmentState
 
-      const { firstName, lastName, birthDate, startDate } = state
+      const { 
+        firstName,
+        lastName,
+        birthDate,
+        startDate,
+        street,
+        city,
+        usaState,
+        zipcode,
+        departmentState
+      } = state
+
       userRedux.push({
         firstName,
         lastName,
@@ -30,7 +48,9 @@ export const saveUserDataSlice = createSlice({
         startDate,
         street,
         city,
-        zipcode
+        usaState,
+        zipcode,
+        departmentState
       })
 
       localStorage.setItem('userData', JSON.stringify(userRedux))

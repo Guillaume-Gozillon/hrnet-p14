@@ -16,7 +16,9 @@ const Form = () => {
   const [startDateObj, setStartDate] = useState(null)
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
+  const [usaState, setUsaState] = useState('')
   const [zipcode, setZipcode] = useState('')
+  const [departmentState, setDepartmentState] = useState('')
 
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
@@ -28,8 +30,12 @@ const Form = () => {
     startDate,
     street,
     city,
-    zipcode
+    usaState,
+    zipcode,
+    departmentState
   }
+
+  console.log(data)
 
   const submitSave = e => {
     e.preventDefault()
@@ -59,7 +65,7 @@ const Form = () => {
         <div>
           <InputLabel id='city' value='Ville' setState={setCity} />
         </div>
-        <ListboxSelect data={stateUSA} />
+        <ListboxSelect data={stateUSA} setState={setUsaState} />
         <InputLabel
           id='zipcode'
           value='Code postale'
@@ -67,7 +73,7 @@ const Form = () => {
           type='number'
         />
       </div>
-      <ListboxSelect data={department} />
+      <ListboxSelect data={department} setState={setDepartmentState} />
       <button onClick={submitSave}>Sauvegarder</button>
     </form>
   )
