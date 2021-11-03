@@ -5,7 +5,8 @@
 }
 
 body {
-  background: #d1e3dd;
+  --tw-bg-opacity: 1;
+  background-color: rgba(251, 191, 36, var(--tw-bg-opacity));
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   color: #393d3f;

@@ -6,4 +6,3 @@ export const store = configureStore({
     save: saveUserDataSlice
   }
 })
-// saveUserData

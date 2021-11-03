@@ -3,20 +3,20 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import DatePicker from '@mui/lab/DatePicker'
 
-const BasicDatePicker = ({value, setState}) => {
-
+const DatePickerForm = ({ value, setState }) => {
   return (
-    <>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <div className='my-3'>
+      <LocalizationProvider dateAdapter={AdapterDateFns} >
         <DatePicker
+          className='test'
           label='Date de naissance'
           value={value}
           onChange={newBirthDate => setState(newBirthDate)}
           renderInput={params => <TextField {...params} />}
         />
       </LocalizationProvider>
-    </>
+    </div>
   )
 }
 
-export default BasicDatePicker
+export default DatePickerForm

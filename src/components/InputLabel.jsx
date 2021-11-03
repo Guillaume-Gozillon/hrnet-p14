@@ -3,11 +3,11 @@ const InputLabel = ({ id, value, setState, type }) => {
 
   return (
     <>
-      <label htmlFor={id} className='mb-1 text-lg'>
+      <label htmlFor={id} className=' text-lg'>
         {value}
       </label>
       <input
-        className='mb-3 rounded-md border-solid border-4'
+        className='my-1 rounded-md border-solid border-4 w-full px-2 py-2'
         type={type}
         name={id}
         id={id}
