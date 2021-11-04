@@ -3,16 +3,17 @@ import { Fragment, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { reset } from '../Redux/saveUserDataSlice'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const ModaleButton = ({ setState }) => {
   const dispatch = useDispatch()
   let [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
-    dispatch(reset())
     setIsOpen(false)
+    dispatch(reset())
   }
-  
+
   const openModal = e => {
     e.preventDefault()
     setIsOpen(true)

@@ -12,8 +12,6 @@ import { useEffect } from 'react'
 const Form = () => {
   const dispatch = useDispatch()
 
-  // const firstNameRedux = useSelector(state => state.firstName ? firstNameRedux : 'Guillaume')
-
   const [
     firstNameRedux,
     lastNameRedux,
@@ -35,12 +33,6 @@ const Form = () => {
     state.zipcode,
     state.departmentState
   ])
-
-  // useEffect((test) => {
-  //   console.log("...",firstName, test)
-
-  //   setFirstName(firstName)
-  // }, [firstName])
 
   const [firstName, setFirstName] = useState(firstNameRedux)
   const [lastName, setLastName] = useState(lastNameRedux)
@@ -73,15 +65,12 @@ const Form = () => {
 
   return (
     <form className='flex flex-col'>
-      <p>{lastName}</p>
-      <p>Redux: {lastNameRedux}</p>
-      {/* <InputLabel
+      <InputLabel
         id='firstname'
-        valueText='Prénom'
+        value='Prénom'
         setState={setFirstName}
         type='text'
-        value={firstName}
-      /> */}
+      />
       <InputLabel
         id='lastName'
         value='Nom'
