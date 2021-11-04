@@ -36,8 +36,7 @@ const Form = () => {
     departmentState
   }
 
-  const submitSave = e => {
-    e.preventDefault()
+  const submitSave = () => {
     dispatch(save(data))
   }
 
@@ -57,7 +56,7 @@ const Form = () => {
       />
       <DatePickerForm value={birthDateObj} setState={setBirthDate} />
       <DatePickerForm value={startDateObj} setState={setStartDate} />
-      <div className='w-full border-8 border-yellow-200 p-4 mb-3 rounded-2xl bg-yellow-50'>
+      <div className='w-full p-4 mb-3 rounded-2xl bg-yellow-50'>
         <div className='name'>
           <InputLabel id='street' value='Adresse' setState={setStreet} />
         </div>
@@ -77,12 +76,6 @@ const Form = () => {
         data={department}
         setState={setDepartmentState}
       />
-      {/* <button
-        className='text-lg font-medium text-yellow-900 border-4 border-yellow-200 bg-yellow-100 mt-4 p-2 rounded-2xl hover:bg-yellow-300 hover:text-white focus:text-white focus:outline-none focus:font-bold focus:ring-2 focus:bg-yellow-300 focus:ring-opacity-50'
-        onClick={submitSave}
-      >
-        Sauvegarder
-      </button> */}
       <ModaleButton setState={submitSave} />
     </form>
   )

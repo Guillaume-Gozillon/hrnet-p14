@@ -5,11 +5,16 @@ const ModaleButton = ({ setState }) => {
   let [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => setIsOpen(false)
-  const openModal = () => setIsOpen(true)
+
+  const openModal = e => {
+    e.preventDefault()
+    setIsOpen(true)
+    setState()
+  }
 
   return (
     <>
-      <div className=''>
+      <div>
         <button
           type='button'
           onClick={openModal}
@@ -54,27 +59,28 @@ const ModaleButton = ({ setState }) => {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <div className='inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl'>
+              <div className='inline-block w-full max-w-md py-8 px-10 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl border-4 border-yellow-300'>
                 <Dialog.Title
                   as='h3'
                   className='text-lg font-medium leading-6 text-gray-900'
                 >
-                  Payment successful
+                  Utilisateur sauvegardé !
                 </Dialog.Title>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
-                    Your payment has been successfully submitted. We’ve sent you
-                    an email with all of the details of your order.
+                    Votre nouvel utilisateur a été créé avec succès. Rendez vous
+                    dans la partie "Employé" pour voir la liste de tout vos
+                    employés ainsi que le détail des informations.
                   </p>
                 </div>
 
                 <div className='mt-4'>
                   <button
                     type='button'
-                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+                    className='inline-flex justify-center px-4 py-2 text-sm font-medium text-yellow-900 bg-yellow-100 border border-transparent rounded-md hover:bg-yellow-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-yellow-500'
                     onClick={closeModal}
                   >
-                    Got it, thanks!
+                    Okay, merci !
                   </button>
                 </div>
               </div>
