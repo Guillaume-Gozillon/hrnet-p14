@@ -12,7 +12,6 @@ const InputLabel = ({ id, value, setState, type }) => {
         name={id}
         id={id}
         onChange={handleSearch}
-    
       />
     </>
   )

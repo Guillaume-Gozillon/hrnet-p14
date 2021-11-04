@@ -1,15 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { reset } from '../Redux/saveUserDataSlice'
-import { useSelector } from 'react-redux'
 
 const ModaleButton = ({ setState }) => {
-  const dispatch = useDispatch()
   let [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
-    dispatch(reset())
     setIsOpen(false)
   }
   
