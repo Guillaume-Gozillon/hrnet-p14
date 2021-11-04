@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+const initialState = { user : {
   firstName: '',
   lastName: '',
   birthDate: null,
@@ -10,6 +10,7 @@ const initialState = {
   usaState: '',
   zipcode:'',
   departmentState:''
+  }
 }
 
 const userRedux = []
@@ -54,9 +55,20 @@ export const saveUserDataSlice = createSlice({
       })
 
       localStorage.setItem('userData', JSON.stringify(userRedux))
+    },
+    reset: state => {
+      state.firstName = '',
+      state.lastName = '',
+      state.birthDate = null,
+      state.startDate = null,
+      state.street = '',
+      state.city = '',
+      state.usaState = '',
+      state.zipcode = '',
+      state.departmentState = ''
     }
   }
 })
 
-export const { save } = saveUserDataSlice.actions
+export const { save, reset } = saveUserDataSlice.actions
 export default saveUserDataSlice.reducer

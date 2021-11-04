@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { save } from '../Redux/saveUserDataSlice'
 
 import { stateUSA, department } from '../utils'
@@ -7,19 +7,50 @@ import ListboxSelect from './ListboxSelect'
 import InputLabel from './InputLabel'
 import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
+import { useEffect } from 'react'
 
 const Form = () => {
   const dispatch = useDispatch()
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [birthDateObj, setBirthDate] = useState(null)
-  const [startDateObj, setStartDate] = useState(null)
-  const [street, setStreet] = useState('')
-  const [city, setCity] = useState('')
-  const [usaState, setUsaState] = useState('')
-  const [zipcode, setZipcode] = useState('')
-  const [departmentState, setDepartmentState] = useState('')
+  // const firstNameRedux = useSelector(state => state.firstName ? firstNameRedux : 'Guillaume')
+
+  const [
+    firstNameRedux,
+    lastNameRedux,
+    birthDateRedux,
+    startDateRedux,
+    streetRedux,
+    cityRedux,
+    usaStateRedux,
+    zipcodeRedux,
+    departmentStateRedux
+  ] = useSelector(state => [
+    state.firstName,
+    state.lastName,
+    state.birthDate,
+    state.startDate,
+    state.street,
+    state.city,
+    state.usaState,
+    state.zipcode,
+    state.departmentState
+  ])
+
+  // useEffect((test) => {
+  //   console.log("...",firstName, test)
+
+  //   setFirstName(firstName)
+  // }, [firstName])
+
+  const [firstName, setFirstName] = useState(firstNameRedux)
+  const [lastName, setLastName] = useState(lastNameRedux)
+  const [birthDateObj, setBirthDate] = useState(birthDateRedux)
+  const [startDateObj, setStartDate] = useState(startDateRedux)
+  const [street, setStreet] = useState(streetRedux)
+  const [city, setCity] = useState(cityRedux)
+  const [usaState, setUsaState] = useState(usaStateRedux)
+  const [zipcode, setZipcode] = useState(zipcodeRedux)
+  const [departmentState, setDepartmentState] = useState(departmentStateRedux)
 
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
@@ -42,12 +73,15 @@ const Form = () => {
 
   return (
     <form className='flex flex-col'>
-      <InputLabel
+      <p>{lastName}</p>
+      <p>Redux: {lastNameRedux}</p>
+      {/* <InputLabel
         id='firstname'
-        value='Prénom'
+        valueText='Prénom'
         setState={setFirstName}
         type='text'
-      />
+        value={firstName}
+      /> */}
       <InputLabel
         id='lastName'
         value='Nom'

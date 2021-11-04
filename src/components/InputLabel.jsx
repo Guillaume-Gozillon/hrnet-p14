@@ -7,11 +7,12 @@ const InputLabel = ({ id, value, setState, type }) => {
         {value}
       </label>
       <input
-        className='my-1 rounded-md border-solid border-4 w-full px-2 py-2'
+        className='my-1 rounded-md border-4 w-full px-2 py-2 focus:outline-none focus:border-yellow-300'
         type={type}
         name={id}
         id={id}
         onChange={handleSearch}
+    
       />
     </>
   )

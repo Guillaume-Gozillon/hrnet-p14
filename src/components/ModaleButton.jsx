@@ -1,11 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { reset } from '../Redux/saveUserDataSlice'
+import { useSelector } from 'react-redux'
 
 const ModaleButton = ({ setState }) => {
+  const dispatch = useDispatch()
   let [isOpen, setIsOpen] = useState(false)
 
-  const closeModal = () => setIsOpen(false)
-
+  const closeModal = () => {
+    dispatch(reset())
+    setIsOpen(false)
+  }
+  
   const openModal = e => {
     e.preventDefault()
     setIsOpen(true)
@@ -64,7 +71,7 @@ const ModaleButton = ({ setState }) => {
                   as='h3'
                   className='text-lg font-medium leading-6 text-gray-900'
                 >
-                  Utilisateur sauvegardé !
+                  Utilisateur sauvegardé
                 </Dialog.Title>
                 <div className='mt-2'>
                   <p className='text-sm text-gray-500'>
