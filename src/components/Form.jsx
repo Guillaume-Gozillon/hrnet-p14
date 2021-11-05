@@ -1,52 +1,34 @@
 import { useEffect, useState } from 'react'
-import { stateUSA, department } from '../utils'
+import { stateUSA, department } from '../utils/utils'
 import ListboxSelect from './ListboxSelect'
 import InputLabel from './InputLabel'
 import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
 
 const Form = () => {
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const [firstName, setFirstName] = useState()
+  const [lastName, setLastName] = useState()
   const [birthDateObj, setBirthDate] = useState(null)
   const [startDateObj, setStartDate] = useState(null)
-  const [street, setStreet] = useState('')
-  const [city, setCity] = useState('')
-  const [usaState, setUsaState] = useState('')
-  const [zipcode, setZipcode] = useState('')
-  const [departmentState, setDepartmentState] = useState('')
-  const [userData, setUserData] = useState([])
-
+  const [street, setStreet] = useState()
+  const [city, setCity] = useState()
+  const [usaState, setUsaState] = useState()
+  const [zipcode, setZipcode] = useState()
+  const [departmentState, setDepartmentState] = useState()
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
 
-  const data = {
-    firstName,
-    lastName,
-    birthDate,
-    startDate,
-    street,
-    city,
-    usaState,
-    zipcode,
-    departmentState
-  }
-
-  const userData = []
-
-  userData.push(data)
+  const [formStorage, setFormStorage] = useState([])
 
   useEffect(() => {
-    const item = localStorage.getItem('userData')
-
-    if (item) {
-      setUserData(data)
+    if (localStorage.getItem('formStorage')) {
+      setFormStorage(JSON.parse(localStorage.getItem('formStorage')))
     }
   }, [])
 
-  const submitSave = () => {
-    localStorage.setItem('userData', JSON.stringify(userData))
-  }
+  useEffect(() => {
+    localStorage.setItem('formStorage', JSON.stringify(formStorage))
+  }, [formStorage])
 
   return (
     <form className='flex flex-col'>
@@ -85,9 +67,29 @@ const Form = () => {
         data={department}
         setState={setDepartmentState}
       />
-      <ModaleButton setState={submitSave} />
+      <ModaleButton
+        setFormStorage={setFormStorage}
+        firstName={firstName}
+        lastName={lastName}
+        birthDate={birthDate}
+        startDate={startDate}
+        street={street}
+        city={city}
+        usaState={usaState}
+        zipcode={zipcode}
+        departmentState={departmentState}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        setBirthDate={setBirthDate}
+        setStartDate={setStartDate}
+        setStreet={setStreet}
+        setCity={setCity}
+        setUsaState={setUsaState}
+        setZipcode={setZipcode}
+        setDepartmentState={setDepartmentState}
+      />
     </form>
   )
 }
-
 export default Form
+// https://codepen.io/learnwebcode/pen/Exaqbvx?editors=1010

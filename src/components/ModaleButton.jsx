@@ -1,17 +1,58 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
-const ModaleButton = ({ setState }) => {
+const ModaleButton = ({
+  setFormStorage,
+  setFirstName,
+  setLastName,
+  setBirthDate,
+  setStartDate,
+  setStreet,
+  setCity,
+  setUsaState,
+  setZipcode,
+  setDepartmentState,
+  firstName,
+  lastName,
+  birthDate,
+  startDate,
+  street,
+  city,
+  usaState,
+  zipcode,
+  departmentState
+}) => {
   let [isOpen, setIsOpen] = useState(false)
 
   const closeModal = () => {
     setIsOpen(false)
+    setFirstName('vvsfvvfvf')
+    setLastName('')
+    setBirthDate(null)
+    setStartDate(null)
+    setStreet('')
+    setCity('')
+    setUsaState(null)
+    setZipcode('')
+    setDepartmentState(null)
   }
-  
+
   const openModal = e => {
     e.preventDefault()
     setIsOpen(true)
-    setState()
+    setFormStorage(prev =>
+      prev.concat({
+        firstName,
+        lastName,
+        birthDate,
+        startDate,
+        street,
+        city,
+        usaState,
+        zipcode,
+        departmentState
+      })
+    )
   }
 
   return (
