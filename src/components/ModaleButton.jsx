@@ -26,7 +26,7 @@ const ModaleButton = ({
 
   const closeModal = () => {
     setIsOpen(false)
-    setFirstName('vvsfvvfvf')
+    setFirstName('')
     setLastName('')
     setBirthDate(null)
     setStartDate(null)

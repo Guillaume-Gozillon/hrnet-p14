@@ -10,17 +10,14 @@ const EmployeeList = () => {
     }
   }, [])
 
-  console.log(data);
+  console.log(data)
 
   return (
     <main>
       <h1 className='text-5xl mb-4'>HRnet</h1>
       <h2>Liste des employés</h2>
-      
-      {data &&
-        data.map((item, index) => (
-          <p key={index}>{item.firstName}</p>
-        ))}
+
+      {data && data.map((item, index) => <p key={index}>{item.firstName}</p>)}
 
       <Link to='/' className='mb-4 underline hover:text-blue-500'>
         Back home

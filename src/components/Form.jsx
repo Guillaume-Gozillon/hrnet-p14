@@ -18,6 +18,8 @@ const Form = () => {
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
 
+  console.log(firstName);
+
   const [formStorage, setFormStorage] = useState([])
 
   useEffect(() => {
