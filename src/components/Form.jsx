@@ -15,12 +15,31 @@ const Form = () => {
   const [usaState, setUsaState] = useState()
   const [zipcode, setZipcode] = useState()
   const [departmentState, setDepartmentState] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+  
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
 
-  console.log(firstName);
+  // console.log(new Date(birthDateObj).toLocaleDateString())
 
   const [formStorage, setFormStorage] = useState([])
+  useEffect(() => {
+    if (isOpen === true) {
+      setFormStorage(prev =>
+        prev.concat({
+          firstName,
+          lastName,
+          birthDate,
+          startDate,
+          street,
+          city,
+          usaState,
+          zipcode,
+          departmentState
+        })
+      )
+    }
+  }, [isOpen])
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
@@ -69,27 +88,7 @@ const Form = () => {
         data={department}
         setState={setDepartmentState}
       />
-      <ModaleButton
-        setFormStorage={setFormStorage}
-        firstName={firstName}
-        lastName={lastName}
-        birthDate={birthDate}
-        startDate={startDate}
-        street={street}
-        city={city}
-        usaState={usaState}
-        zipcode={zipcode}
-        departmentState={departmentState}
-        setFirstName={setFirstName}
-        setLastName={setLastName}
-        setBirthDate={setBirthDate}
-        setStartDate={setStartDate}
-        setStreet={setStreet}
-        setCity={setCity}
-        setUsaState={setUsaState}
-        setZipcode={setZipcode}
-        setDepartmentState={setDepartmentState}
-      />
+      <ModaleButton setIsOpen={setIsOpen} isOpen={isOpen} />
     </form>
   )
 }
