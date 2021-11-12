@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
 const EmployeeList = () => {
   const [data, setData] = useState(null)
+  const [sortConfig, setSortConfig] = useState(null)
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
@@ -10,24 +11,31 @@ const EmployeeList = () => {
     }
   }, [])
 
-  const handleFirstname = () => console.log('Prénom')
-  const handleLastname = () =>
-    data.forEach(el => {
-      console.log(el.firstName)
-    })
+  const sortedItems = useMemo(() => {
+    let sortableItems = [data]
+    if (sortConfig !== null) {
+      sortedData.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1
+        }
+        return 0
+      })
+    }
+    return sortableItems
+  }, [data, sortConfig])
 
-  useEffect(() => {
-    const nombres = [4, 2, 5, 1, 3]
-    nombres.sort(function (a, b) {
-      return a - b
-    })
-    console.log(nombres)
+  const requestSort = key => {
+    let direction = 'ascending'
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending'
+    }
+    setSortConfig({ key, direction })
+  }
 
-    // data.forEach(el => {
-    //   console.log(el.firstName)
-    // })
-  }, [data])
-
+  // console.log(sortedData)
   console.log(data)
 
   return (
@@ -42,15 +50,23 @@ const EmployeeList = () => {
       <table>
         <thead>
           <tr>
-            <th onClick={handleFirstname}>Prénom</th>
-            <th onClick={handleLastname}>Nom</th>
-            <th onClick={handleLastname}>Date de naissance</th>
-            <th onClick={handleLastname}>Date de démarrage</th>
-            <th onClick={handleLastname}>Rue</th>
-            <th onClick={handleLastname}>Ville</th>
-            <th onClick={handleLastname}>État</th>
-            <th onClick={handleLastname}>Code postale</th>
-            <th onClick={handleLastname}>Secteur d'activité</th>
+            <th>
+              <button type='button' onClick={() => requestSort('Name')}>
+                Name
+              </button>
+            </th>
+            <th>
+              <button type='button' onClick={() => setSortConfig('price')}>
+                Price
+              </button>
+            </th>
+            <th>Date de naissance</th>
+            <th>Date de démarrage</th>
+            <th>Rue</th>
+            <th>Ville</th>
+            <th>État</th>
+            <th>Code postale</th>
+            <th>Secteur d'activité</th>
           </tr>
         </thead>
         <tbody>
@@ -59,13 +75,13 @@ const EmployeeList = () => {
               <tr key={key}>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
-                <td>{item.birthDate}</td>
+                {/* <td>{item.birthDate}</td>
                 <td>{item.startDate}</td>
                 <td>{item.street}</td>
                 <td>{item.city}</td>
                 <td>{item.usaState}</td>
                 <td>{item.zipcode}</td>
-                <td>{item.departmentState}</td>
+                <td>{item.departmentState}</td> */}
               </tr>
             ))}
         </tbody>
