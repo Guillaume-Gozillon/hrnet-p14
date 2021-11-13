@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
+import { useSortableData } from '../utils/useSortableData'
 
 const EmployeeList = () => {
   const [data, setData] = useState(null)
-  const [sortConfig, setSortConfig] = useState(null)
+  const [newData, setNewData] = useState(null)
+
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
@@ -11,32 +13,12 @@ const EmployeeList = () => {
     }
   }, [])
 
-  const sortedItems = useMemo(() => {
-    let sortableItems = [data]
-    if (sortConfig !== null) {
-      sortedData.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1
-        }
-        return 0
-      })
-    }
-    return sortableItems
-  }, [data, sortConfig])
+  console.log(data);
+  const { items, requestSort } = useSortableData(data)
 
-  const requestSort = key => {
-    let direction = 'ascending'
-    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending'
-    }
-    setSortConfig({ key, direction })
-  }
-
-  // console.log(sortedData)
-  console.log(data)
+  useEffect(() => {
+    setNewData(items)
+  }, [items])
 
   return (
     <main className='w-11/12'>
@@ -51,7 +33,7 @@ const EmployeeList = () => {
         <thead>
           <tr>
             <th>
-              <button type='button' onClick={() => requestSort('Name')}>
+              <button type='button' onClick={() => requestSort('firstName')}>
                 Name
               </button>
             </th>
@@ -70,8 +52,8 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((item, key) => (
+          {newData &&
+            newData.map((item, key) => (
               <tr key={key}>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
