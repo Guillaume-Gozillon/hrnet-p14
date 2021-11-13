@@ -22,6 +22,7 @@ const useSortableData = (items, config = null) => {
 
   const requestSort = key => {
     let direction = 'ascending'
+    
     if (
       sortConfig &&
       sortConfig.key === key &&
@@ -31,7 +32,6 @@ const useSortableData = (items, config = null) => {
     }
     setSortConfig({ key, direction })
   }
-
   return { items: sortedItems, requestSort, sortConfig }
 }
 

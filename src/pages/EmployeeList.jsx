@@ -4,8 +4,6 @@ import { useSortableData } from '../utils/useSortableData'
 
 const EmployeeList = () => {
   const [data, setData] = useState(null)
-  const [newData, setNewData] = useState(null)
-
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
@@ -13,12 +11,16 @@ const EmployeeList = () => {
     }
   }, [])
 
-  console.log(data);
-  const { items, requestSort } = useSortableData(data)
+  const { items, requestSort, sortConfig } = useSortableData(data)
 
-  useEffect(() => {
-    setNewData(items)
-  }, [items])
+  console.log('items', items)
+
+  const getClassNamesFor = name => {
+    if (!sortConfig) {
+      return
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined
+  }
 
   return (
     <main className='w-11/12'>
@@ -33,7 +35,11 @@ const EmployeeList = () => {
         <thead>
           <tr>
             <th>
-              <button type='button' onClick={() => requestSort('firstName')}>
+              <button
+                type='button'
+                onClick={() => requestSort('firstName')}
+                className={getClassNamesFor('firstName')}
+              >
                 Name
               </button>
             </th>
@@ -52,18 +58,18 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {newData &&
-            newData.map((item, key) => (
+          {data &&
+            data.map((item, key) => (
               <tr key={key}>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
-                {/* <td>{item.birthDate}</td>
+                <td>{item.birthDate}</td>
                 <td>{item.startDate}</td>
                 <td>{item.street}</td>
                 <td>{item.city}</td>
                 <td>{item.usaState}</td>
                 <td>{item.zipcode}</td>
-                <td>{item.departmentState}</td> */}
+                <td>{item.departmentState}</td>
               </tr>
             ))}
         </tbody>
