@@ -4,7 +4,7 @@ export const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config)
 
   const sortedItems = useMemo(() => {
-    let sortableItems = [items]
+    let sortableItems = [...items]
     if (sortConfig !== null) {
       sortableItems.sort((a, b) => {
         if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -30,5 +30,5 @@ export const useSortableData = (items, config = null) => {
     }
     setSortConfig({ key, direction })
   }
-  return { items: sortedItems, requestSort }
+  return { items: sortedItems, requestSort, sortConfig }
 }

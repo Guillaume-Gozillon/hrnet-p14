@@ -2,18 +2,27 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSortableData } from '../utils/useSortableData'
 
-const EmployeeList = () => {
-  const [data, setData] = useState(null)
+const EmployeeList = ({ products }) => {
+  const [newData, setNewData] = useState(null)
+
+  const [newItems, setNewItems] = useState(null)
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
-      setData(JSON.parse(localStorage.getItem('formStorage')))
+      setNewData(JSON.parse(localStorage.getItem('formStorage')))
     }
   }, [])
 
-  const { items, requestSort, sortConfig } = useSortableData(data)
+  // const { sortConfig } = useSortableData(products)
+  const requestSort = useSortableData(newData)
+  const sortConfig = useSortableData(newData)
+  const items = useSortableData(newData)
 
-  console.log('items', items)
+  useEffect(() => {
+    setNewItems(items)
+  }, [])
+
+  console.log(newItems)
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -34,19 +43,17 @@ const EmployeeList = () => {
       <table>
         <thead>
           <tr>
-            <th>
-              <button
-                type='button'
-                onClick={() => requestSort('firstName')}
-                className={getClassNamesFor('firstName')}
-              >
-                Name
-              </button>
+            <th
+              onClick={() => items.requestSort('name')}
+              // className={() => items.getClassNamesFor('name')}
+            >
+              <button type='button'>Name</button>
             </th>
-            <th>
-              <button type='button' onClick={() => setSortConfig('price')}>
-                Price
-              </button>
+            <th
+              onClick={() => requestSort('lastName')}
+              className={getClassNamesFor('lastName')}
+            >
+              <button type='button'>Price</button>
             </th>
             <th>Date de naissance</th>
             <th>Date de démarrage</th>
@@ -58,10 +65,10 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          {data &&
-            data.map((item, key) => (
-              <tr key={key}>
-                <td>{item.firstName}</td>
+          {/* {newItems &&
+            newItems.map((item, i) => (
+              <tr key={i}>
+                <td>{item.name}</td>
                 <td>{item.lastName}</td>
                 <td>{item.birthDate}</td>
                 <td>{item.startDate}</td>
@@ -71,7 +78,7 @@ const EmployeeList = () => {
                 <td>{item.zipcode}</td>
                 <td>{item.departmentState}</td>
               </tr>
-            ))}
+            ))} */}
         </tbody>
       </table>
     </main>
