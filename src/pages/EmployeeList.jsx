@@ -3,26 +3,15 @@ import { useEffect, useState } from 'react'
 import { useSortableData } from '../utils/useSortableData'
 
 const EmployeeList = ({ products }) => {
-  const [newData, setNewData] = useState(null)
+  // const [newData, setNewData] = useState(null)
 
-  const [newItems, setNewItems] = useState(null)
+  // useEffect(() => {
+  //   if (localStorage.getItem('formStorage')) {
+  //     setNewData(JSON.parse(localStorage.getItem('formStorage')))
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    if (localStorage.getItem('formStorage')) {
-      setNewData(JSON.parse(localStorage.getItem('formStorage')))
-    }
-  }, [])
-
-  // const { sortConfig } = useSortableData(products)
-  const requestSort = useSortableData(newData)
-  const sortConfig = useSortableData(newData)
-  const items = useSortableData(newData)
-
-  useEffect(() => {
-    setNewItems(items)
-  }, [])
-
-  console.log(newItems)
+  const { items, requestSort, sortConfig } = useSortableData(products)
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -44,8 +33,8 @@ const EmployeeList = ({ products }) => {
         <thead>
           <tr>
             <th
-              onClick={() => items.requestSort('name')}
-              // className={() => items.getClassNamesFor('name')}
+              onClick={() => requestSort('name')}
+              className={() => getClassNamesFor('name')}
             >
               <button type='button'>Name</button>
             </th>
@@ -65,20 +54,20 @@ const EmployeeList = ({ products }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {newItems &&
-            newItems.map((item, i) => (
+          {items &&
+            items.map((item, i) => (
               <tr key={i}>
                 <td>{item.name}</td>
-                <td>{item.lastName}</td>
+                {/* <td>{item.lastName}</td>
                 <td>{item.birthDate}</td>
                 <td>{item.startDate}</td>
                 <td>{item.street}</td>
                 <td>{item.city}</td>
                 <td>{item.usaState}</td>
                 <td>{item.zipcode}</td>
-                <td>{item.departmentState}</td>
+                <td>{item.departmentState}</td> */}
               </tr>
-            ))} */}
+            ))}
         </tbody>
       </table>
     </main>
