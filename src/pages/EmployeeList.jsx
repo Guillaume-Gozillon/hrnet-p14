@@ -2,16 +2,33 @@ import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { useSortableData } from '../utils/useSortableData'
 
-const EmployeeList = ({ products }) => {
-  // const [newData, setNewData] = useState(null)
+const EmployeeList = ({ products, data, isFetching, test }) => {
+  const [newData, setNewData] = useState(null)
+  const [newItems, setNewItems] = useState(null)
+  const [newRequestSort, setNewRequestSort] = useState(null)
+  const [newSortConfig, setNewsortConfig] = useState(null)
+
+  console.log('data', data)
+  // console.log('newItems', newItems.items)
 
   // useEffect(() => {
   //   if (localStorage.getItem('formStorage')) {
   //     setNewData(JSON.parse(localStorage.getItem('formStorage')))
+  //     setIsFetching(true)
   //   }
   // }, [])
 
-  const { items, requestSort, sortConfig } = useSortableData(products)
+  const { items, requestSort, sortConfig } = useSortableData(data)
+
+  // useEffect(() => {
+  //   const items = useSortableData(data)
+  //   const requestSort = useSortableData(data)
+  //   const sortConfig = useSortableData(data)
+
+  //   setNewItems(items)
+  //   setNewRequestSort(requestSort)
+  //   setNewsortConfig(sortConfig)
+  // }, [])
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -33,7 +50,7 @@ const EmployeeList = ({ products }) => {
         <thead>
           <tr>
             <th
-              onClick={() => requestSort('name')}
+              onClick={() => requestSort('firstName')}
               className={() => getClassNamesFor('name')}
             >
               <button type='button'>Name</button>
@@ -54,11 +71,11 @@ const EmployeeList = ({ products }) => {
           </tr>
         </thead>
         <tbody>
-          {items &&
-            items.map((item, i) => (
-              <tr key={i}>
-                <td>{item.name}</td>
-                {/* <td>{item.lastName}</td>
+          {items !== null
+            ? items.map((item, i) => (
+                <tr key={i}>
+                  <td>{item.firstName}</td>
+                  {/* <td>{item.lastName}</td>
                 <td>{item.birthDate}</td>
                 <td>{item.startDate}</td>
                 <td>{item.street}</td>
@@ -66,8 +83,9 @@ const EmployeeList = ({ products }) => {
                 <td>{item.usaState}</td>
                 <td>{item.zipcode}</td>
                 <td>{item.departmentState}</td> */}
-              </tr>
-            ))}
+                </tr>
+              ))
+            : null}
         </tbody>
       </table>
     </main>

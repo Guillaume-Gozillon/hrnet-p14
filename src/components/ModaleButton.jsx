@@ -1,7 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
+import { useDispatch } from 'react-redux'
+import { whenOpen } from '../Redux/updateStorage'
 
 const ModaleButton = ({ setIsOpen, isOpen }) => {
+  const dispatch = useDispatch()
   const closeModal = () => {
     setIsOpen(false)
   }
@@ -9,6 +12,7 @@ const ModaleButton = ({ setIsOpen, isOpen }) => {
   const openModal = e => {
     e.preventDefault()
     setIsOpen(true)
+    dispatch(whenOpen())
   }
 
   return (

@@ -6,20 +6,20 @@ import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { save } from '../Redux/saveUserDataSlice'
+import { whenOpen } from '../Redux/updateStorage'
 
 const Form = () => {
   const dispatch = useDispatch()
 
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
   const [birthDateObj, setBirthDate] = useState(null)
   const [startDateObj, setStartDate] = useState(null)
-  const [street, setStreet] = useState()
-  const [city, setCity] = useState()
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
   const [usaState, setUsaState] = useState()
-  const [zipcode, setZipcode] = useState()
-  const [departmentState, setDepartmentState] = useState()
+  const [zipcode, setZipcode] = useState('')
+  const [departmentState, setDepartmentState] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
   const birthDate = JSON.stringify(birthDateObj)
@@ -51,7 +51,7 @@ const Form = () => {
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
       setFormStorage(JSON.parse(localStorage.getItem('formStorage')))
-      dispatch(save(formStorage))
+      // dispatch(save(formStorage))
     }
   }, [])
 
@@ -59,11 +59,7 @@ const Form = () => {
     localStorage.setItem('formStorage', JSON.stringify(formStorage))
   }, [formStorage])
 
-  const submitForm = () => {
-    // console.log('heyyy');
-  }
-
-  console.log(formStorage)
+  // console.log(formStorage)
 
   return (
     <form className='flex flex-col'>
@@ -102,11 +98,7 @@ const Form = () => {
         data={department}
         setState={setDepartmentState}
       />
-      <ModaleButton
-        onClikc={submitForm}
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-      />
+      <ModaleButton setIsOpen={setIsOpen} isOpen={isOpen} />
     </form>
   )
 }
