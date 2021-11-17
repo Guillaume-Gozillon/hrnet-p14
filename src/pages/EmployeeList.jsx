@@ -25,7 +25,7 @@ const EmployeeList = ({ data }) => {
           <tr>
             <th
               onClick={() => requestSort('firstName')}
-              className={() => getClassNamesFor('firstName')}
+              className={getClassNamesFor('firstName')}
             >
               <button type='button'>Name</button>
             </th>
@@ -45,21 +45,20 @@ const EmployeeList = ({ data }) => {
           </tr>
         </thead>
         <tbody>
-          {items !== null
-            ? items.map((item, i) => (
-                <tr key={i}>
-                  <td>{item.firstName}</td>
-                  <td>{item.lastName}</td>
-                  <td>{item.birthDate}</td>
-                  <td>{item.startDate}</td>
-                  <td>{item.street}</td>
-                  <td>{item.city}</td>
-                  <td>{item.usaState}</td>
-                  <td>{item.zipcode}</td>
-                  <td>{item.departmentState}</td>
-                </tr>
-              ))
-            : null}
+          {items &&
+            items.map((item, i) => (
+              <tr key={i}>
+                <td>{item.firstName}</td>
+                <td>{item.lastName}</td>
+                <td>{item.birthDate}</td>
+                <td>{item.startDate}</td>
+                <td>{item.street}</td>
+                <td>{item.city}</td>
+                <td>{item.usaState}</td>
+                <td>{item.zipcode}</td>
+                <td>{item.departmentState}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </main>

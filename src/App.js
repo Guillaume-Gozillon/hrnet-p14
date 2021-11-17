@@ -18,6 +18,7 @@ const App = () => {
     { id: 6, name: 'Sour Cream ', price: 2.9, stock: 86 },
     { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 }
   ]
+
   const [data, setData] = useState(null)
 
   useEffect(() => {
