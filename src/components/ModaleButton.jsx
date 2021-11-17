@@ -7,12 +7,13 @@ const ModaleButton = ({ setIsOpen, isOpen }) => {
   const dispatch = useDispatch()
   const closeModal = () => {
     setIsOpen(false)
+    dispatch(whenOpen(false))
   }
-
+  
   const openModal = e => {
     e.preventDefault()
     setIsOpen(true)
-    dispatch(whenOpen())
+    dispatch(whenOpen(true))
   }
 
   return (

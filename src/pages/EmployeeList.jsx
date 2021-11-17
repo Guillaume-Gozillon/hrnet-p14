@@ -1,34 +1,8 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { useSortableData } from '../utils/useSortableData'
 
-const EmployeeList = ({ products, data, isFetching, test }) => {
-  const [newData, setNewData] = useState(null)
-  const [newItems, setNewItems] = useState(null)
-  const [newRequestSort, setNewRequestSort] = useState(null)
-  const [newSortConfig, setNewsortConfig] = useState(null)
-
-  console.log('data', data)
-  // console.log('newItems', newItems.items)
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('formStorage')) {
-  //     setNewData(JSON.parse(localStorage.getItem('formStorage')))
-  //     setIsFetching(true)
-  //   }
-  // }, [])
-
+const EmployeeList = ({ data }) => {
   const { items, requestSort, sortConfig } = useSortableData(data)
-
-  // useEffect(() => {
-  //   const items = useSortableData(data)
-  //   const requestSort = useSortableData(data)
-  //   const sortConfig = useSortableData(data)
-
-  //   setNewItems(items)
-  //   setNewRequestSort(requestSort)
-  //   setNewsortConfig(sortConfig)
-  // }, [])
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -51,7 +25,7 @@ const EmployeeList = ({ products, data, isFetching, test }) => {
           <tr>
             <th
               onClick={() => requestSort('firstName')}
-              className={() => getClassNamesFor('name')}
+              className={() => getClassNamesFor('firstName')}
             >
               <button type='button'>Name</button>
             </th>
@@ -75,14 +49,14 @@ const EmployeeList = ({ products, data, isFetching, test }) => {
             ? items.map((item, i) => (
                 <tr key={i}>
                   <td>{item.firstName}</td>
-                  {/* <td>{item.lastName}</td>
-                <td>{item.birthDate}</td>
-                <td>{item.startDate}</td>
-                <td>{item.street}</td>
-                <td>{item.city}</td>
-                <td>{item.usaState}</td>
-                <td>{item.zipcode}</td>
-                <td>{item.departmentState}</td> */}
+                  <td>{item.lastName}</td>
+                  <td>{item.birthDate}</td>
+                  <td>{item.startDate}</td>
+                  <td>{item.street}</td>
+                  <td>{item.city}</td>
+                  <td>{item.usaState}</td>
+                  <td>{item.zipcode}</td>
+                  <td>{item.departmentState}</td>
                 </tr>
               ))
             : null}

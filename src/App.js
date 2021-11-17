@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 const App = () => {
-  const test = useSelector(state => state.whenOpen)
-  console.log(test)
+  const updateState = useSelector(state => state.whenOpen)
+  console.log(updateState.toUpdate)
 
   const products = [
     { id: 1, name: 'Cheese', price: 4.9, stock: 20 },
@@ -19,14 +19,12 @@ const App = () => {
     { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 }
   ]
   const [data, setData] = useState(null)
-  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
       setData(JSON.parse(localStorage.getItem('formStorage')))
-      setIsFetching(true)
     }
-  }, [test])
+  }, [updateState])
 
   return (
     <div className='App'>
@@ -35,14 +33,7 @@ const App = () => {
           <Home />
         </Route>
         <Route path='/employee-list' exact>
-          {data !== null ? (
-            <EmployeeList
-              products={products}
-              data={data}
-              isFetching={isFetching}
-              test={test}
-            />
-          ) : null}
+          {data && <EmployeeList products={products} data={data} />}
         </Route>
       </Switch>
     </div>

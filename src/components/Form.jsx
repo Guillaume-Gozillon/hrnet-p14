@@ -5,12 +5,7 @@ import InputLabel from './InputLabel'
 import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
 
-import { useDispatch, useSelector } from 'react-redux'
-import { whenOpen } from '../Redux/updateStorage'
-
 const Form = () => {
-  const dispatch = useDispatch()
-
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [birthDateObj, setBirthDate] = useState(null)
@@ -24,7 +19,6 @@ const Form = () => {
 
   const birthDate = JSON.stringify(birthDateObj)
   const startDate = JSON.stringify(startDateObj)
-
   // console.log(new Date(birthDateObj).toLocaleDateString())
 
   const [formStorage, setFormStorage] = useState([])
@@ -45,21 +39,17 @@ const Form = () => {
         })
       )
     }
-    // dispatch(save(data))
   }, [isOpen])
 
   useEffect(() => {
     if (localStorage.getItem('formStorage')) {
       setFormStorage(JSON.parse(localStorage.getItem('formStorage')))
-      // dispatch(save(formStorage))
     }
   }, [])
 
   useEffect(() => {
     localStorage.setItem('formStorage', JSON.stringify(formStorage))
   }, [formStorage])
-
-  // console.log(formStorage)
 
   return (
     <form className='flex flex-col'>
