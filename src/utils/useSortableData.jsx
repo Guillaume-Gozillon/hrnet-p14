@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useState, useMemo } from 'react'
 
 export const useSortableData = (items, config = null) => {
+  console.log(items)
   const [sortConfig, setSortConfig] = useState(config)
 
   const sortedItems = useMemo(() => {

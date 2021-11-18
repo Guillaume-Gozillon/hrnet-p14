@@ -19,13 +19,17 @@ const App = () => {
     { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 }
   ]
 
-  const [data, setData] = useState(null)
+  // const [data, setData] = useState(null)
 
-  useEffect(() => {
-    if (localStorage.getItem('formStorage')) {
-      setData(JSON.parse(localStorage.getItem('formStorage')))
-    }
-  }, [updateState])
+  // useEffect(() => {
+  //   if (localStorage.getItem('formStorage')) {
+  //     setData(JSON.parse(localStorage.getItem('formStorage')))
+  //   }
+  // }, [updateState])
+
+  const data = JSON.parse(localStorage.getItem('formStorage'))
+
+  console.log(data);
 
   return (
     <div className='App'>
@@ -33,9 +37,15 @@ const App = () => {
         <Route path='/' exact>
           <Home />
         </Route>
-        <Route path='/employee-list' exact>
+        {/* <Route path='/employee-list' exact>
           {data && <EmployeeList products={products} data={data} />}
-        </Route>
+        </Route> */}
+        <Route
+          exact
+          path='/employee-list'
+          render={data => <EmployeeList {...data}
+           />}
+        />
       </Switch>
     </div>
   )
