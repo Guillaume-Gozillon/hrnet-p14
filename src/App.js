@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 const App = () => {
   const updateState = useSelector(state => state.whenOpen)
-  console.log(updateState.toUpdate)
+  // console.log(updateState.toUpdate)
 
   const products = [
     { id: 1, name: 'Cheese', price: 4.9, stock: 20 },
@@ -19,13 +19,21 @@ const App = () => {
     { id: 7, name: 'Fancy French Cheese 🇫🇷', price: 99, stock: 12 }
   ]
 
-  const [data, setData] = useState(null)
+  // const [data, setData] = useState(null)
+  const [storage, setStorage] = useState(
+    JSON.parse(localStorage.getItem('formStorage'))
+  )
 
-  useEffect(() => {
-    if (localStorage.getItem('formStorage')) {
-      setData(JSON.parse(localStorage.getItem('formStorage')))
-    }
-  }, [updateState])
+  // useEffect(() => {
+  //   if (localStorage.getItem('formStorage')) {
+  //     setData(JSON.parse(localStorage.getItem('formStorage')))
+  //   }
+  // }, [updateState])
+
+  const data = JSON.parse(localStorage.getItem('formStorage'))
+
+  console.log(data)
+  console.log(storage)
 
   return (
     <div className='App'>
@@ -34,7 +42,7 @@ const App = () => {
           <Home />
         </Route>
         <Route path='/employee-list' exact>
-          {data && <EmployeeList products={products} data={data} />}
+          {data && <EmployeeList setStorage={setStorage} data={data} />}
         </Route>
       </Switch>
     </div>

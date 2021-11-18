@@ -5,7 +5,7 @@ import InputLabel from './InputLabel'
 import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
 
-const Form = () => {
+const Form = ({setStorage}) => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [birthDateObj, setBirthDate] = useState(null)

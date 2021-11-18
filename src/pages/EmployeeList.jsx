@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSortableData } from '../utils/useSortableData'
 
-const EmployeeList = ({ data }) => {
+const EmployeeList = ({ setStorage, storage }) => {
+  const data = JSON.parse(localStorage.getItem('formStorage'))
+
   const { items, requestSort, sortConfig } = useSortableData(data)
 
   const getClassNamesFor = name => {
@@ -10,6 +13,8 @@ const EmployeeList = ({ data }) => {
     }
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
+
+  console.log('from employeesData', data)
 
   return (
     <main className='w-11/12'>

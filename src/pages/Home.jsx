@@ -1,7 +1,7 @@
 import Form from '../components/Form'
 import { Link } from 'react-router-dom'
 
-const Home = () => {
+const Home = ({setStorage}) => {
   return (
     <main>
       <div className='flex justify-around items-center'>
@@ -13,7 +13,7 @@ const Home = () => {
           Afficher les employés actuels
         </Link>
       </div>
-      <Form />
+      <Form setStorage={setStorage} />
     </main>
   )
 }
