@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useSortableData } from '../utils/useSortableData'
+import Datatable from '../components/Datatable'
 
-const EmployeeList = ({ setStorage, storage }) => {
+const EmployeeList = () => {
   const data = JSON.parse(localStorage.getItem('formStorage'))
-
   const { items, requestSort, sortConfig } = useSortableData(data)
+  const [keyword, setKeyword] = useState('')
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -14,7 +15,13 @@ const EmployeeList = ({ setStorage, storage }) => {
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
 
-  console.log('from employeesData', data)
+  const search = rows => {
+    return rows.filter(
+      row =>
+        row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+        row.lastName.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+    )
+  }
 
   return (
     <main className='w-11/12'>
@@ -23,6 +30,13 @@ const EmployeeList = ({ setStorage, storage }) => {
         <Link to='/' className='mb-4 underline hover:text-blue-500'>
           Back home
         </Link>
+        <input
+          type='text'
+          name=''
+          value={keyword}
+          onChange={e => setKeyword(e.target.value)}
+          className='border-4 border-light-blue-500 border-opacity-100'
+        />
       </div>
       <h2>Liste des employés</h2>
       <table>
@@ -32,38 +46,60 @@ const EmployeeList = ({ setStorage, storage }) => {
               onClick={() => requestSort('firstName')}
               className={getClassNamesFor('firstName')}
             >
-              <button type='button'>Name</button>
+              Prénom
             </th>
             <th
               onClick={() => requestSort('lastName')}
               className={getClassNamesFor('lastName')}
             >
-              <button type='button'>Price</button>
+              Nom
             </th>
-            <th>Date de naissance</th>
-            <th>Date de démarrage</th>
-            <th>Rue</th>
-            <th>Ville</th>
-            <th>État</th>
-            <th>Code postale</th>
-            <th>Secteur d'activité</th>
+            <th
+              onClick={() => requestSort('birthDate')}
+              className={getClassNamesFor('birthDate')}
+            >
+              Date d'arrivée
+            </th>
+            <th
+              onClick={() => requestSort('startDate')}
+              className={getClassNamesFor('startDate')}
+            >
+              Date de démarrage
+            </th>
+            <th
+              onClick={() => requestSort('street')}
+              className={getClassNamesFor('street')}
+            >
+              Adresse
+            </th>
+            <th
+              onClick={() => requestSort('city')}
+              className={getClassNamesFor('city')}
+            >
+              Ville
+            </th>
+            <th
+              onClick={() => requestSort('usaState')}
+              className={getClassNamesFor('usaState')}
+            >
+              État
+            </th>
+            <th
+              onClick={() => requestSort('zipcode')}
+              className={getClassNamesFor('zipcode')}
+            >
+              Code postale
+            </th>
+            <th
+              onClick={() => requestSort('departmentState')}
+              className={getClassNamesFor('departmentState')}
+            >
+              Secteur d'activité
+            </th>
           </tr>
         </thead>
         <tbody>
-          {items &&
-            items.map((item, i) => (
-              <tr key={i}>
-                <td>{item.firstName}</td>
-                <td>{item.lastName}</td>
-                <td>{item.birthDate}</td>
-                <td>{item.startDate}</td>
-                <td>{item.street}</td>
-                <td>{item.city}</td>
-                <td>{item.usaState}</td>
-                <td>{item.zipcode}</td>
-                <td>{item.departmentState}</td>
-              </tr>
-            ))}
+          <Datatable items={search(items)} />
         </tbody>
       </table>
     </main>
@@ -71,3 +107,4 @@ const EmployeeList = ({ setStorage, storage }) => {
 }
 
 export default EmployeeList
+// https://www.youtube.com/watch?v=d1r0aK5awWk

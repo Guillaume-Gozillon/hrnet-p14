@@ -5,7 +5,7 @@ import InputLabel from './InputLabel'
 import DatePickerForm from './DatePickerForm'
 import ModaleButton from './ModaleButton'
 
-const Form = ({setStorage}) => {
+const Form = () => {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [birthDateObj, setBirthDate] = useState(null)
@@ -17,9 +17,13 @@ const Form = ({setStorage}) => {
   const [departmentState, setDepartmentState] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
-  const birthDate = JSON.stringify(birthDateObj)
-  const startDate = JSON.stringify(startDateObj)
-  // console.log(new Date(birthDateObj).toLocaleDateString())
+  const birthDate = JSON.stringify(
+    new Date(birthDateObj).toLocaleDateString()
+  ).replace(/['"]+/g, '')
+
+  const startDate = JSON.stringify(
+    new Date(startDateObj).toLocaleDateString()
+  ).replace(/['"]+/g, '')
 
   const [formStorage, setFormStorage] = useState([])
 
@@ -94,3 +98,4 @@ const Form = ({setStorage}) => {
 }
 export default Form
 // https://codepen.io/learnwebcode/pen/Exaqbvx?editors=1010
+
