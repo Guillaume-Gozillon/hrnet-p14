@@ -30,15 +30,19 @@ const EmployeeList = () => {
         <Link to='/' className='mb-4 underline hover:text-blue-500'>
           Back home
         </Link>
-        <input
-          type='text'
-          name=''
-          value={keyword}
-          onChange={e => setKeyword(e.target.value)}
-          className='border-4 border-light-blue-500 border-opacity-100'
-        />
+        <div className='flex flex-col'>
+          <label htmlFor='keyword' className=' text-base'>
+            Recherche rapide
+          </label>
+          <input
+            type='text'
+            name='keyword'
+            value={keyword}
+            onChange={e => setKeyword(e.target.value)}
+            className='border-4 border-light-yellow-500 border-opacity-100 my-1 rounded-md w-full px-2  focus:outline-none focus:border-yellow-300'
+          />
+        </div>
       </div>
-      <h2>Liste des employés</h2>
       <table>
         <thead>
           <tr>
