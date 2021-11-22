@@ -4,9 +4,10 @@ import { useSortableData } from '../utils/useSortableData'
 import Datatable from '../components/Datatable'
 
 const EmployeeList = () => {
+  const [keyword, setKeyword] = useState('')
+
   const data = JSON.parse(localStorage.getItem('formStorage'))
   const { items, requestSort, sortConfig } = useSortableData(data)
-  const [keyword, setKeyword] = useState('')
 
   const getClassNamesFor = name => {
     if (!sortConfig) {

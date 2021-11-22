@@ -70,8 +70,16 @@ const Form = () => {
         setState={setLastName}
         type='text'
       />
-      <DatePickerForm value={birthDateObj} setState={setBirthDate} label="Date d'arrivée" />
-      <DatePickerForm value={startDateObj} setState={setStartDate} label="Date de démarrage" />
+      <DatePickerForm
+        value={birthDateObj}
+        setState={setBirthDate}
+        label="Date d'arrivée"
+      />
+      <DatePickerForm
+        value={startDateObj}
+        setState={setStartDate}
+        label='Date de démarrage'
+      />
       <div className='w-full p-4 mb-3 rounded-2xl bg-yellow-50'>
         <div className='name'>
           <InputLabel id='street' value='Adresse' setState={setStreet} />
@@ -98,4 +106,3 @@ const Form = () => {
 }
 export default Form
 // https://codepen.io/learnwebcode/pen/Exaqbvx?editors=1010
-

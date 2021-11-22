@@ -6,7 +6,7 @@ import DatePicker from '@mui/lab/DatePicker'
 const DatePickerForm = ({ value, setState, label }) => {
   return (
     <div className='my-3'>
-      <LocalizationProvider dateAdapter={AdapterDateFns} >
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DatePicker
           className='test'
           label={label}
