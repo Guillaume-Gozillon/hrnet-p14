@@ -1,13 +1,22 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import { useSortableData } from '../utils/useSortableData'
 import Datatable from '../components/Datatable'
+import Pagination from '../components/Pagination'
+import { search } from '../components/search'
 
 const EmployeeList = () => {
+  const [currentPage, setCurrentPage] = useState(1)
   const [keyword, setKeyword] = useState('')
 
+  const postPerPage = 3
   const data = JSON.parse(localStorage.getItem('formStorage'))
-  const { items, requestSort, sortConfig } = useSortableData(data)
+  const indexOfLastPost = currentPage * postPerPage
+  const indexOfFirstPost = indexOfLastPost - postPerPage
+  const currentPost = data.slice(indexOfFirstPost, indexOfLastPost)
+
+  const { items, requestSort, sortConfig } = useSortableData(currentPost)
 
   const getClassNamesFor = name => {
     if (!sortConfig) {
@@ -16,13 +25,7 @@ const EmployeeList = () => {
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
 
-  const search = rows => {
-    return rows.filter(
-      row =>
-        row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-        row.lastName.toLowerCase().indexOf(keyword.toLowerCase()) > -1
-    )
-  }
+  const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
     <main className='w-11/12'>
@@ -104,7 +107,12 @@ const EmployeeList = () => {
           </tr>
         </thead>
         <tbody>
-          <Datatable items={search(items)} />
+          <Datatable items={search(items, keyword)} />
+          <Pagination
+            postPerPage={postPerPage}
+            totalPosts={data.length}
+            paginate={paginate}
+          />
         </tbody>
       </table>
     </main>

@@ -2,10 +2,9 @@ import './style/app.scss'
 import Home from './pages/Home'
 import EmployeeList from './pages/EmployeeList'
 import { Switch, Route } from 'react-router'
+import { useState } from 'react'
 
 const App = () => {
-  const data = JSON.parse(localStorage.getItem('formStorage'))
-
   return (
     <div className='App'>
       <Switch>
@@ -13,7 +12,7 @@ const App = () => {
           <Home />
         </Route>
         <Route path='/employee-list' exact>
-          {data && <EmployeeList data={data} />}
+          <EmployeeList />
         </Route>
       </Switch>
     </div>
