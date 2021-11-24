@@ -26,7 +26,7 @@ export const useSortableData = (items, config = null) => {
     return sortableItems
   }, [items, sortConfig])
 
-  // Si la clef et direction sont ascending, sinon descnending
+  // On verifie l'obj et on donne la valeur ascending ou descending
   const requestSort = key => {
     let direction = 'ascending'
     if (
