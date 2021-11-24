@@ -9,6 +9,7 @@ const EmployeeList = () => {
   const data = JSON.parse(localStorage.getItem('formStorage'))
   const { items, requestSort, sortConfig } = useSortableData(data)
 
+  // initialise l'objet de direction en récuperant la valeur a trier
   const getClassNamesFor = name => {
     if (!sortConfig) {
       return
@@ -16,11 +17,14 @@ const EmployeeList = () => {
     return sortConfig.key === name ? sortConfig.direction : undefined
   }
 
+  console.log(data)
+
   const search = rows => {
     return rows.filter(
       row =>
         row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-        row.lastName.toLowerCase().indexOf(keyword.toLowerCase()) > -1
+        row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+        row.city.toLowerCase().indexOf(keyword.toLowerCase()) > -1
     )
   }
 

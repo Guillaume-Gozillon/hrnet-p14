@@ -3,6 +3,13 @@ import { useState, useMemo } from 'react'
 export const useSortableData = (items, config = null) => {
   const [sortConfig, setSortConfig] = useState(config)
 
+  /**
+   * useMemo pour mémoriser en cache les valeurs de la fonction
+   *
+   * @param {Array} localStorage data
+   * @return {Array} retourne un tableau trié
+   */
+
   const sortedItems = useMemo(() => {
     let sortableItems = [...items]
     if (sortConfig !== null) {
@@ -19,6 +26,7 @@ export const useSortableData = (items, config = null) => {
     return sortableItems
   }, [items, sortConfig])
 
+  // Si la clef et direction sont ascending, sinon descnending
   const requestSort = key => {
     let direction = 'ascending'
     if (
@@ -30,5 +38,6 @@ export const useSortableData = (items, config = null) => {
     }
     setSortConfig({ key, direction })
   }
+
   return { items: sortedItems, requestSort, sortConfig }
 }
