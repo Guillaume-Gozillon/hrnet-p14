@@ -23,7 +23,7 @@ const EmployeeList = () => {
     return rows.filter(
       row =>
         row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
-        row.firstName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
+        row.lastName.toLowerCase().indexOf(keyword.toLowerCase()) > -1 ||
         row.city.toLowerCase().indexOf(keyword.toLowerCase()) > -1
     )
   }
