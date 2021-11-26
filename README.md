@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Projet 14 Openclassrooms | HRNet
+
+Lien package NPM du composant tableau : https://www.npmjs.com/package/datatable-p14
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
